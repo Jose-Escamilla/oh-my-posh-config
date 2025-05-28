@@ -158,4 +158,4 @@ Después de este cambio, los íconos deberían mostrarse correctamente en la ter
 
 Para más detalles y una guía visual sobre cómo personalizar la terminal de Windows y la terminal integrada en VSCode, puedes ver este video:
 
-[Customize Windows Terminal and VS Code Terminal](https://www.youtube.com/watch?v=FUwEh8vh9mw)
+[![Customize Windows Terminal and VS Code Terminal](https://img.youtube.com/vi/FUwEh8vh9mw/hqdefault.jpg)](https://www.youtube.com/watch?v=FUwEh8vh9mw)
