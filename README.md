@@ -1,6 +1,3 @@
-# oh-my-posh-config
-Configuración personalizada de Oh My Posh en Windows
-
 # Guía paso a paso para instalar y configurar Oh My Posh en Windows con PowerShell
 
 Esta guía te ayudará a instalar y configurar Oh My Posh en PowerShell sobre Windows, incluyendo temas personalizados, fuentes e iconos para una experiencia enriquecida en la terminal.
@@ -94,7 +91,12 @@ y añade esta línea al final:
 ```powershell
 Import-Module Terminal-Icons
 ```
+al final tendrás tu archivo de configuración `Microsoft.PowerShell_profile.ps1` como:
 
+```powershell
+oh-my-posh init pwsh --config "C:\Users\jose0\OneDrive\Documentos\Terminal Theme\1_shell.omp.json" | Invoke-Expression
+
+Import-Module Terminal-Icons
 ---
 
 ## Paso 7: Añadir configuración a VSCode
@@ -110,7 +112,7 @@ Si Oh My Posh no aparece en la terminal de VSCode, vuelve a instalarlo con:
 ```powershell
 winget install JanDeDobbeleer.OhMyPosh -s winget
 ```
-
+![Oh My Posh en VSCode]([ruta/a/la/imagen-vscode-terminal.png](https://github.com/Jose-Escamilla/oh-my-posh-config/blob/master/terminal_vscode.png))
 ---
 
 ## Paso 8: Tema personalizado con bloques alineados a la izquierda
@@ -126,7 +128,32 @@ Se modificó el archivo `1_shell.omp.json` para que todos los bloques (usuario, 
 ```
 
 De esta manera, todo el contenido se muestra de forma ordenada y clara en la parte superior izquierda de la terminal.
+![Terminal personalizada con Oh My Posh]([ruta/a/la/imagen-terminal.png](https://github.com/Jose-Escamilla/oh-my-posh-config/blob/master/terminal.png))
 
 ---
 
 ¡Listo! Ya tienes un entorno PowerShell visualmente enriquecido y totalmente personalizado con Oh My Posh.
+
+---
+
+## Nota sobre los íconos en la terminal de VSCode
+
+Por defecto, la terminal integrada de VSCode utiliza el tema predeterminado, por lo que es posible que los íconos de Oh My Posh **no se muestren correctamente**. Para que los íconos aparezcan en la terminal de VSCode, debes cambiar la fuente de la terminal por una Nerd Font, como **CaskaydiaCove Nerd Font** que instalaste previamente.
+
+### Pasos para cambiar la fuente de la terminal en VSCode:
+
+1. Abre VSCode.
+2. Ve a **Archivo > Preferencias > Configuración** (o usa `Ctrl + ,`).
+3. En la barra de búsqueda escribe: `terminal.integrated.fontFamily`.
+4. En el campo correspondiente a la configuración, escribe el nombre exacto de la fuente Nerd Font que instalaste, por ejemplo:
+5. Cierra y vuelve a abrir la terminal integrada (`Ctrl + ``) para que los cambios se apliquen.
+
+Después de este cambio, los íconos deberían mostrarse correctamente en la terminal integrada de VSCode.
+
+---
+
+### Video de referencia
+
+Para más detalles y una guía visual sobre cómo personalizar la terminal de Windows y la terminal integrada en VSCode, puedes ver este video:
+
+[Customize Windows Terminal and VS Code Terminal](https://www.youtube.com/watch?v=FUwEh8vh9mw)
