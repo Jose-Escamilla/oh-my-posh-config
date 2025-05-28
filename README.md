@@ -112,7 +112,7 @@ Si Oh My Posh no aparece en la terminal de VSCode, vuelve a instalarlo con:
 ```powershell
 winget install JanDeDobbeleer.OhMyPosh -s winget
 ```
-![Oh My Posh en VSCode]([ruta/a/la/imagen-vscode-terminal.png](https://github.com/Jose-Escamilla/oh-my-posh-config/blob/master/terminal_vscode.png))
+![Oh My Posh en VSCode](https://github.com/Jose-Escamilla/oh-my-posh-config/blob/master/terminal_vscode.png?raw=true)
 
 ---
 
@@ -130,7 +130,7 @@ Se modificó el archivo `1_shell.omp.json` para que todos los bloques (usuario, 
 
 De esta manera, todo el contenido se muestra de forma ordenada y clara en la parte superior izquierda de la terminal.
 
-![Terminal personalizada con Oh My Posh]([ruta/a/la/imagen-terminal.png](https://github.com/Jose-Escamilla/oh-my-posh-config/blob/master/terminal.png))
+![Terminal personalizada con Oh My Posh](https://github.com/Jose-Escamilla/oh-my-posh-config/blob/master/terminal.png?raw=true)
 
 ---
 
