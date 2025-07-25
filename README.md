@@ -1,3 +1,4 @@
+
 # Guía paso a paso para instalar y configurar Oh My Posh en Windows con PowerShell
 
 Esta guía te ayudará a instalar y configurar Oh My Posh en PowerShell sobre Windows, incluyendo temas personalizados, fuentes e iconos para una experiencia enriquecida en la terminal.
@@ -91,12 +92,7 @@ y añade esta línea al final:
 ```powershell
 Import-Module Terminal-Icons
 ```
-al final tendrás tu archivo de configuración `Microsoft.PowerShell_profile.ps1` como:
 
-```powershell
-oh-my-posh init pwsh --config "C:\Users\jose0\OneDrive\Documentos\Terminal Theme\1_shell.omp.json" | Invoke-Expression
-
-Import-Module Terminal-Icons
 ---
 
 ## Paso 7: Añadir configuración a VSCode
@@ -112,6 +108,7 @@ Si Oh My Posh no aparece en la terminal de VSCode, vuelve a instalarlo con:
 ```powershell
 winget install JanDeDobbeleer.OhMyPosh -s winget
 ```
+
 ![Oh My Posh en VSCode](https://github.com/Jose-Escamilla/oh-my-posh-config/blob/master/terminal_vscode.png?raw=true)
 
 ---
@@ -134,13 +131,9 @@ De esta manera, todo el contenido se muestra de forma ordenada y clara en la par
 
 ---
 
-¡Listo! Ya tienes un entorno PowerShell visualmente enriquecido y totalmente personalizado con Oh My Posh.
-
----
-
 ## Nota sobre los íconos en la terminal de VSCode
 
-Por defecto, la terminal integrada de VSCode utiliza el tema predeterminado, por lo que es posible que los íconos de Oh My Posh **no se muestren correctamente**. Para que los íconos aparezcan en la terminal de VSCode, debes cambiar la fuente de la terminal por una Nerd Font, como **CaskaydiaCove Nerd Font** que instalaste previamente.
+Por defecto, la terminal integrada de VSCode utiliza el tema predeterminado, por lo que es posible que los íconos de Oh My Posh **no se muestren correctamente**. Para que los íconos aparezcan en la terminal de VSCode, debes cambiar la fuente de la terminal por una Nerd Font, como **CaskaydiaCove Nerd Font** o **MesloLGS NF** que instalaste previamente.
 
 ### Pasos para cambiar la fuente de la terminal en VSCode:
 
@@ -148,14 +141,87 @@ Por defecto, la terminal integrada de VSCode utiliza el tema predeterminado, por
 2. Ve a **Archivo > Preferencias > Configuración** (o usa `Ctrl + ,`).
 3. En la barra de búsqueda escribe: `terminal.integrated.fontFamily`.
 4. En el campo correspondiente a la configuración, escribe el nombre exacto de la fuente Nerd Font que instalaste, por ejemplo:
+   ```
+   CaskaydiaCove Nerd Font
+   ```
+  > ⚠ Yo use la fuente: MesloLGS NF
 5. Cierra y vuelve a abrir la terminal integrada (`Ctrl + ``) para que los cambios se apliquen.
 
 Después de este cambio, los íconos deberían mostrarse correctamente en la terminal integrada de VSCode.
 
 ---
 
-### Video de referencia
+# Respaldo: Solución de problemas y configuración avanzada de PowerShell
 
-Para más detalles y una guía visual sobre cómo personalizar la terminal de Windows y la terminal integrada en VSCode, puedes ver este video:
+Durante la configuración de Oh My Posh en PowerShell, se aplicaron las siguientes soluciones y mejoras para garantizar un entorno funcional y visualmente enriquecido:
 
-[![Customize Windows Terminal and VS Code Terminal](https://img.youtube.com/vi/FUwEh8vh9mw/hqdefault.jpg)](https://www.youtube.com/watch?v=FUwEh8vh9mw)
+### Problemas encontrados
+
+- Error al importar el módulo PSReadLine versión 2.3.6 (no estaba instalado).
+- Conflictos por módulos duplicados o versiones no compatibles.
+- Los íconos no se visualizaban correctamente en la terminal (aparecían caracteres extraños o cuadros).
+- Inicialización incompleta o conflictiva de módulos en perfiles de PowerShell.
+
+### Soluciones aplicadas
+
+- Se eliminó la restricción de versión específica en la importación de PSReadLine, usando simplemente:
+
+```powershell
+Import-Module PSReadLine -Force
+```
+
+- Se consolidó el perfil de PowerShell (`Microsoft.PowerShell_profile.ps1`) para cargar en orden:
+  - Oh My Posh con el tema personalizado.
+  - PSReadLine (sin versión fija).
+  - Terminal-Icons para los íconos en listados.
+  - Autocompletado de Chocolatey.
+  - Inicialización de Conda si está instalado.
+
+- Se instaló y configuró la fuente **MesloLGS NF** (Nerd Font), necesaria para mostrar correctamente los íconos en la terminal.
+
+### Perfil final recomendado
+
+Abre tu perfil usando:
+```powershell
+notepad $PROFILE
+```
+y luego pega lo siguiente: 
+
+```powershell
+# =========================
+# Perfil personalizado de PowerShell de José Escamilla
+# =========================
+
+# Activar tema de terminal con Oh My Posh
+oh-my-posh init pwsh --config "C:\Users\jose0\OneDrive\Documentos\Terminal Theme\1_shell.omp.json" | Invoke-Expression
+
+# Mejoras visuales y autocompletado
+Import-Module PSReadLine -Force
+Import-Module Terminal-Icons
+
+# Autocompletado para Chocolatey
+$ChocolateyProfile = "$env:ChocolateyInstall\helpers\chocolateyProfile.psm1"
+if (Test-Path $ChocolateyProfile) {
+    Import-Module $ChocolateyProfile
+}
+
+# Activar Conda si está instalado
+#region conda initialize
+# !! Contents within this block are managed by 'conda init' !!
+if (Test-Path "C:\Users\jose0\anaconda3\Scripts\conda.exe") {
+    (& "C:\Users\jose0\anaconda3\Scripts\conda.exe" "shell.powershell" "hook") | Out-String | ? { $_ } | Invoke-Expression
+}
+#endregion
+```
+
+### Resultado
+
+- La terminal PowerShell carga sin errores.
+- Oh My Posh muestra el prompt con colores e íconos.
+- Los listados de archivos (`ls`, `Get-ChildItem`) muestran íconos.
+- Compatible con Conda y Chocolatey para autocompletado.
+- Íconos visibles en la terminal de Windows y en VSCode tras configurar la fuente Nerd Font.
+
+---
+
+¡Listo! Ahora tienes todo el proceso documentado y la configuración recomendada para una terminal PowerShell moderna y funcional.
